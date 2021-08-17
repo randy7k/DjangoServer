@@ -39,7 +39,7 @@
 
 
 <!-- TABLE OF CONTENTS -->
-<details open="open">
+<!-- <details open="open">
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -64,12 +64,12 @@
   </ol>
 </details>
 
-
+ -->
 
 <!-- ABOUT THE PROJECT -->
 ## About 
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 Django is an efficient, versatile and dynamically evolving web application development framework. When Django initially gained popularity, the recommended setup for running Django applications was based around Apache with mod_wsgi. The art of running Django advanced and these days the recommended configuration is more efficient and resilient, but also more complex and includes such tools as: Nginx, Gunicorn, virtualenv, supervisord and PostgreSQL.
 
@@ -159,7 +159,7 @@ As the application user create a virtual Python environment in the application d
   ```sh
   sudo su - hello
   hello@django:~$ cd /webapps/hello_django/
-  hello@django:~$ python3 -m venv .
+  hello@django:~$ virtaulenv .
 
   New python executable in hello_django/bin/python
   Installing distribute..............done.
@@ -284,7 +284,7 @@ Now that you have gunicorn, you can test whether it can serve your Django applic
   ```
 You should now be able to access the Gunicorn server from http://example.com:8001 . I intentionally changed port 8000 to 8001 to force your browser to establish a new connection.
 
-Gunicorn is installed and ready to serve your app. Let’s set some configuration options to make it more useful. I like to set a number of parameters, so let’s put them all into a small BASH script, which I save as bin/gunicorn_start
+Gunicorn is installed and ready to serve your app. Let’s set some configuration options to make it more useful. I like to set a number of parameters, so let’s put them all into a small BASH script, which I save as bin/gunicorn_start.bash
 
   ```sh
   #!/bin/bash
@@ -321,16 +321,16 @@ exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --log-file=-
   ```
   
-Set the executable bit on the gunicorn_start script:
+Set the executable bit on the gunicorn_start.bash script:
   
   ```sh
-  $ sudo chmod u+x bin/gunicorn_start
+  $ sudo chmod u+x bin/gunicorn_start.bash
   ```
-  You can test your gunicorn_start script by running it as the user hello.
+  You can test your gunicorn_start.bash script by running it as the user hello.
  
   ```sh
 $ sudo su - hello
-hello@django:~$ bin/gunicorn_start
+hello@django:~$ bin/gunicorn_start.bash
 Starting hello_app as hello
 2013-06-09 14:21:45 [10724] [INFO] Starting gunicorn 18.0
 2013-06-09 14:21:45 [10724] [DEBUG] Arbiter booted
@@ -349,7 +349,7 @@ Starting hello_app as hello
 2013-06-09 14:21:48 [10724] [INFO] Shutting down: Master
 $ exit
   ```
-Note the parameters set in gunicorn_start. You’ll need to set the paths and filenames to match your setup.
+Note the parameters set in gunicorn_start.bash You’ll need to set the paths and filenames to match your setup.
 
 As a rule-of-thumb set the --workers (NUM_WORKERS) according to the following formula: 2 * CPUs + 1. The idea being, that at any given time half of your workers will be busy doing I/O. For a single CPU machine it would give you 3.
 
@@ -385,7 +385,7 @@ Your gunicorn_start script should now be ready and working. We need to make sure
 hello.conf
   ```sh
 [program:hello]
-command = /webapps/hello_django/bin/gunicorn_start                    ; Command to start app
+command = /webapps/hello_django/bin/gunicorn_start.bash               ; Command to start app
 user = hello                                                          ; User to run as
 stdout_logfile = /webapps/hello_django/logs/gunicorn_supervisor.log   ; Where to write log messages
 redirect_stderr = true                                                ; Save stderr in the same log
