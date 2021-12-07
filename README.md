@@ -159,7 +159,7 @@ As the application user create a virtual Python environment in the application d
   ```sh
   sudo su - hello
   hello@django:~$ cd /webapps/hello_django/
-  hello@django:~$ virtaulenv .
+  hello@django:~$ virtualenv .
 
   New python executable in hello_django/bin/python
   Installing distribute..............done.
