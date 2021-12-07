@@ -233,7 +233,7 @@ Install dependencies:
 Install psycopg2 database adapter:
 
   ```sh
-  (hello_django)hello@django:~$ pip install psycopg2
+  (hello_django)hello@django:~$ pip install psycopg2-binary
   ```
 You can now configure the databases section in your settings.py:
 
