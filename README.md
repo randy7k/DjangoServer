@@ -294,7 +294,8 @@ DJANGODIR=/webapps/hello_django/hello             # Django project directory
 SOCKFILE=/webapps/hello_django/run/gunicorn.sock  # we will communicte using this unix socket
 USER=hello                                        # the user to run as
 GROUP=webapps                                     # the group to run as
-NUM_WORKERS=3                                     # how many worker processes should Gunicorn spawn
+NUM_WORKERS=2                                     # how many worker processes should Gunicorn spawn
+NUM_THREADS=4                                     # how many threads per worker
 DJANGO_SETTINGS_MODULE=hello.settings             # which settings file should Django use
 DJANGO_WSGI_MODULE=hello.wsgi                     # WSGI module name
 
@@ -315,6 +316,7 @@ test -d $RUNDIR || mkdir -p $RUNDIR
 exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --workers $NUM_WORKERS \
+  --threads $NUM_THREADS \
   --user=$USER --group=$GROUP \
   --bind=unix:$SOCKFILE \
   --log-level=debug \
